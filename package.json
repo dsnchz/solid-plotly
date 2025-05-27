@@ -1,23 +1,60 @@
 {
-  "name": "template-solidjs-library",
+  "name": "@dschz/solid-plotly",
   "version": "0.0.0",
-  "description": "Template for SolidJS library using tsup for bundling. Configured with Bun, NVM, TypeScript, ESLint, Prettier, Vitest, and GHA",
+  "description": "SolidJS wrapper for Plotly.js – reactive and performant charts powered by Plotly, built for Solid.",
   "type": "module",
-  "author": "Daniel Sanchez <dsanc89@icloud.com>",
+  "author": "Daniel Sanchez <dsanc89@pm.me>",
   "license": "MIT",
-  "homepage": "https://github.com/thedanchez/template-solidjs-library#readme",
+  "homepage": "https://github.com/dsnchz/solid-plotly#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thedanchez/template-solidjs-library.git"
+    "url": "https://github.com/dsnchz/solid-plotly.git"
   },
   "bugs": {
-    "url": "https://github.com/thedanchez/template-solidjs-library/issues"
+    "url": "https://github.com/dsnchz/solid-plotly/issues"
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "analytics",
+    "bar",
+    "candlestick",
+    "chart-component",
+    "charting",
+    "charts",
+    "component-library",
+    "data-component",
+    "data-visualization",
+    "dataviz",
+    "dashboard",
+    "graph",
+    "graphs",
+    "heatmap",
+    "interactive-charts",
+    "line",
+    "plot",
+    "plotly",
+    "plotly-js",
+    "plotly-solid",
+    "plotly.js",
+    "plotlyjs",
+    "reactive-charts",
+    "responsive-charts",
+    "scatter",
+    "solid",
+    "solid-js",
+    "solidjs",
+    "solidjs-component",
+    "solidjs-plotly",
+    "time-series",
+    "timeseries",
+    "typescript",
+    "ui-component",
+    "visualization"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -56,6 +93,8 @@
     "@tailwindcss/vite": "^4.1.5",
     "@testing-library/jest-dom": "^6.6.3",
     "@types/bun": "^1.2.12",
+    "@types/plotly.js": "^3.0.0",
+    "@types/plotly.js-dist-min": "^2.3.4",
     "@typescript-eslint/eslint-plugin": "^8.32.0",
     "@typescript-eslint/parser": "^8.32.0",
     "@vitest/coverage-istanbul": "^3.1.3",
@@ -65,18 +104,25 @@
     "globals": "^16.1.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
+    "plotly.js": "^3.0.1",
+    "plotly.js-dist-min": "^3.0.1",
     "prettier": "^3.5.3",
+    "process": "^0.11.10",
     "solid-js": "^1.9.6",
     "tailwindcss": "^4.1.5",
     "tsup": "^8.4.0",
     "tsup-preset-solid": "^2.2.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.32.0",
+    "util": "^0.12.5",
     "vite": "^6.3.5",
     "vite-plugin-solid": "^2.11.6",
     "vitest": "^3.1.3"
   },
   "peerDependencies": {
     "solid-js": ">=1.6.0"
+  },
+  "dependencies": {
+    "@dschz/try-catch": "^1.1.2"
   }
 }

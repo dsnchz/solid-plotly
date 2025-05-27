@@ -1,2 +1,9 @@
-// Main library export site
-// Use playground app (via Vite) to test and document the library
+export { createPlotComponent, type PlotlyModule, type PlotProps } from "./createPlotComponent";
+export type {
+  PlotComponentEventHandlers,
+  PlotlyConfig,
+  PlotlyData,
+  PlotlyFigure,
+  PlotlyFrame,
+  PlotlyLayout,
+} from "./types";
