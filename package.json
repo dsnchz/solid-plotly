@@ -1,6 +1,6 @@
 {
   "name": "@dschz/solid-plotly",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "SolidJS wrapper for Plotly.js – reactive and performant charts powered by Plotly, built for Solid.",
   "type": "module",
   "author": "Daniel Sanchez <dsanc89@pm.me>",
