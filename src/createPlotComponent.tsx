@@ -117,72 +117,52 @@ export type PlotlyModule = Pick<
  * - Supports all Plotly.js event handlers through props
  * - Includes built-in resize handling when useResize is enabled
  */
-export const createPlotComponent = (Plotly: PlotlyModule) => (props: PlotProps) => {
-  const _props = mergeProps(
-    {
-      id: "solid-plotly",
-      config: {} as PlotlyConfig,
-      data: [] as PlotlyData[],
-      frames: [] as PlotlyFrame[],
-      layout: {} as PlotlyLayout,
-      useResize: true,
-      style: {
-        position: "relative",
-        display: "inline-block",
-      } as JSX.CSSProperties,
-    },
-    props,
-  );
-
-  let container!: HTMLElement;
-  let plotElement!: PlotlyHTMLElement;
-  const [initialized, setInitialized] = createSignal(false);
-
-  const [containerProps] = splitProps(_props, ["id", "class", "style", "ref"]);
-  const [eventProps] = splitProps(_props, PLOT_COMPONENT_EVENT_NAMES);
-  const [plotProps] = splitProps(_props, [
-    "data",
-    "layout",
-    "config",
-    "onInitialized",
-    "onPurge",
-    "onUpdate",
-    "onError",
-    "onResize",
-    "useResize",
-  ]);
-
-  const layout = () =>
-    plotProps.useResize ? { ...plotProps.layout, autosize: true } : plotProps.layout;
-
-  const config = () =>
-    plotProps.useResize ? { ...plotProps.config, responsive: true } : plotProps.config;
-
-  onMount(async () => {
-    const [error, element] = await tryCatch(
-      Plotly.newPlot(container, plotProps.data, layout(), config()),
+export const createPlotComponent =
+  (Plotly: PlotlyModule) =>
+  (props: PlotProps): JSX.Element => {
+    const _props = mergeProps(
+      {
+        id: "solid-plotly",
+        config: {} as PlotlyConfig,
+        data: [] as PlotlyData[],
+        frames: [] as PlotlyFrame[],
+        layout: {} as PlotlyLayout,
+        useResize: true,
+        style: {
+          position: "relative",
+          display: "inline-block",
+        } as JSX.CSSProperties,
+      },
+      props,
     );
 
-    if (error) {
-      plotProps.onError?.(error);
-      return;
-    }
+    let container!: HTMLElement;
+    let plotElement!: PlotlyHTMLElement;
+    const [initialized, setInitialized] = createSignal(false);
 
-    Plotly.Plots.resize(element);
-    attachComponentEvents(element, eventProps);
+    const [containerProps] = splitProps(_props, ["id", "class", "style", "ref"]);
+    const [eventProps] = splitProps(_props, PLOT_COMPONENT_EVENT_NAMES);
+    const [plotProps] = splitProps(_props, [
+      "data",
+      "layout",
+      "config",
+      "onInitialized",
+      "onPurge",
+      "onUpdate",
+      "onError",
+      "onResize",
+      "useResize",
+    ]);
 
-    plotProps.onInitialized?.(getFigureData(element), element);
-    plotElement = element;
+    const layout = () =>
+      plotProps.useResize ? { ...plotProps.layout, autosize: true } : plotProps.layout;
 
-    setInitialized(true);
-  });
+    const config = () =>
+      plotProps.useResize ? { ...plotProps.config, responsive: true } : plotProps.config;
 
-  createEffect(() => {
-    if (!initialized()) return;
-
-    const updatePlot = async () => {
+    onMount(async () => {
       const [error, element] = await tryCatch(
-        Plotly.react(container, plotProps.data, layout(), config()),
+        Plotly.newPlot(container, plotProps.data, layout(), config()),
       );
 
       if (error) {
@@ -190,47 +170,69 @@ export const createPlotComponent = (Plotly: PlotlyModule) => (props: PlotProps) 
         return;
       }
 
-      plotProps.onUpdate?.(getFigureData(element), element);
-    };
+      Plotly.Plots.resize(element);
+      attachComponentEvents(element, eventProps);
 
-    void updatePlot();
-  });
+      plotProps.onInitialized?.(getFigureData(element), element);
+      plotElement = element;
 
-  createEffect(() => {
-    if (!initialized() || !plotProps.useResize) return;
+      setInitialized(true);
+    });
 
-    const resizeHandler = () => {
-      Plotly.Plots.resize(plotElement);
-      plotProps.onResize?.();
-    };
+    createEffect(() => {
+      if (!initialized()) return;
 
-    const resizeObserver = new ResizeObserver(resizeHandler);
-    resizeObserver.observe(container);
+      const updatePlot = async () => {
+        const [error, element] = await tryCatch(
+          Plotly.react(container, plotProps.data, layout(), config()),
+        );
+
+        if (error) {
+          plotProps.onError?.(error);
+          return;
+        }
+
+        plotProps.onUpdate?.(getFigureData(element), element);
+      };
+
+      void updatePlot();
+    });
+
+    createEffect(() => {
+      if (!initialized() || !plotProps.useResize) return;
+
+      const resizeHandler = () => {
+        Plotly.Plots.resize(plotElement);
+        plotProps.onResize?.();
+      };
+
+      const resizeObserver = new ResizeObserver(resizeHandler);
+      resizeObserver.observe(container);
+
+      onCleanup(() => {
+        resizeObserver.disconnect();
+      });
+    });
 
     onCleanup(() => {
-      resizeObserver.disconnect();
+      if (!initialized()) return;
+
+      removeComponentEvents(plotElement, eventProps);
+      Plotly.purge(plotElement);
+      plotProps.onPurge?.(getFigureData(plotElement), plotElement);
+
+      setInitialized(false);
     });
-  });
 
-  onCleanup(() => {
-    if (!initialized()) return;
-
-    removeComponentEvents(plotElement, eventProps);
-    Plotly.purge(plotElement);
-    plotProps.onPurge?.(getFigureData(plotElement), plotElement);
-
-    setInitialized(false);
-  });
-
-  return (
-    <div
-      id={containerProps.id}
-      class={containerProps.class}
-      style={containerProps.style}
-      ref={(el) => {
-        container = el;
-        containerProps.ref?.(el);
-      }}
-    />
-  );
-};
+    return (
+      <div
+        id={containerProps.id}
+        class={containerProps.class}
+        style={containerProps.style}
+        ref={(el) => {
+          container = el;
+          containerProps.ref?.(el);
+        }}
+      />
+    );
+  };
