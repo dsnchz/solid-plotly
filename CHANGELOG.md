@@ -1,5 +1,11 @@
 # @dschz/solid-plotly
 
+## 0.1.1
+
+### Patch Changes
+
+- Adds missing return signature for jsr publish
+
 ## 0.1.0
 
 ### 🎉 Initial Release
