@@ -1,5 +1,11 @@
 # @dschz/solid-plotly
 
+## 0.1.2
+
+### Patch Changes
+
+- Updates readme badges
+
 ## 0.1.1
 
 ### Patch Changes
