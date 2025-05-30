@@ -5,9 +5,10 @@
 # @dschz/solid-plotly
 
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![npm](https://img.shields.io/npm/v/@dschz/solid-plotly)](https://www.npmjs.com/package/@dschz/solid-plotly)
+[![npm](https://img.shields.io/npm/v/@dschz/solid-plotly?color=blue)](https://www.npmjs.com/package/@dschz/solid-plotly)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@dschz/solid-plotly)](https://bundlephobia.com/package/@dschz/solid-plotly)
 [![CI](https://github.com/dsnchz/solid-plotly/actions/workflows/ci.yaml/badge.svg)](https://github.com/dsnchz/solid-plotly/actions/workflows/ci.yaml)
+[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white)](https://discord.gg/XUVHnhsHKK)
 
 > A modern, type-safe SolidJS component for [Plotly.js](https://plotly.com/javascript/) charts with fine-grained reactivity and full event support.
 
@@ -418,12 +419,12 @@ function MyChart() {
 - **`PlotProps`** - Complete props interface for the Plot component
 - **`PlotlyModule`** - Type for the Plotly.js module interface
 
-## License
-
-MIT License
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-For more examples and detailed documentation, visit the [GitHub repository](https://github.com/dsnchz/solid-plotly).
+For more examples and detailed documentation, visit the [GitHub repository](https://github.com/dsnchz/solid-plotly) or check out the [Discord](https://discord.gg/XUVHnhsHKK) community.
+
+## License
+
+MIT License
