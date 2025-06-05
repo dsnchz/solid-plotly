@@ -7,6 +7,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![npm](https://img.shields.io/npm/v/@dschz/solid-plotly?color=blue)](https://www.npmjs.com/package/@dschz/solid-plotly)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@dschz/solid-plotly)](https://bundlephobia.com/package/@dschz/solid-plotly)
+[![JSR](https://jsr.io/badges/@dschz/solid-plotly/score)](https://jsr.io/@dschz/solid-plotly)
 [![CI](https://github.com/dsnchz/solid-plotly/actions/workflows/ci.yaml/badge.svg)](https://github.com/dsnchz/solid-plotly/actions/workflows/ci.yaml)
 [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white)](https://discord.gg/XUVHnhsHKK)
 
