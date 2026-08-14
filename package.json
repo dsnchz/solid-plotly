@@ -107,7 +107,7 @@
     "globals": "^16.1.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
-    "oxfmt": "^0.60.0",
+    "oxfmt": "0.60.0",
     "plotly.js": "^3.0.1",
     "plotly.js-dist-min": "^3.0.1",
     "process": "^0.11.10",
@@ -118,9 +118,9 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.32.0",
     "util": "^0.12.5",
-    "vite": "^6.3.5",
+    "vite": "6.4.3",
     "vite-plugin-solid": "^2.11.6",
-    "vitest": "^3.1.3"
+    "vitest": "3.2.7"
   },
   "peerDependencies": {
     "solid-js": ">=1.6.0"
